@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './edit.scss'
+import './configuration.scss'
 
 import {
   Button,
@@ -10,7 +10,7 @@ import {
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 // Tela de edição de Tag
-const Edit: any = (Parent: any) => {
+const Configuration: any = (Parent: any) => {
   // Define os estados utilizados na tela assim como pega o ID passado pela URL
   const navigate = useNavigate()
   const location = useLocation()
@@ -22,16 +22,16 @@ const Edit: any = (Parent: any) => {
     macAddress: location.state.macAddress,
     category: location.state.category
   })
-  const [categories, setCategories] = useState(Parent.props.categories)
+  const [beacons, setBeacons] = useState(Parent.props.beacons)
 
   // Hook para verificar se há mudança nas categorias de acordo com o componente pai
   useEffect(() => {
     // Define as categorias como as categorias definadas no componente pai
-    setCategories(Parent.props.categories)
-  }, [Parent.props.categories])
+    setBeacons(Parent.props.beacons)
+  }, [Parent.props.beacons])
 
   // Função responsável por requisitar uma Tag específica, passando como parametro o ID da tag
-  async function getTag() {
+  async function getBeacons() {
     await fetch(`http://2zrvp7-8000.preview.csb.app/api/tags/${id}`, {
       method: "GET",
       headers: {
@@ -55,7 +55,7 @@ const Edit: any = (Parent: any) => {
       // Envia para o backend os valores informados no formulário de edição
       body: JSON.stringify(values)
     }).then(() => {
-      Parent.props.getTags()
+      Parent.props.getBeaconss()
       localStorage.setItem("message", "Tag editada com sucesso!")
     }).then(() => navigate('/tags')) // Após, navega para a tela de listagem de Tags
   }
@@ -69,7 +69,7 @@ const Edit: any = (Parent: any) => {
 
   // Ao carregar a página, chama a função que irá requisitar a Tag a ser editada
   useEffect(() => {
-    getTag()
+    getBeacons()
   }, [])
 
   return (
@@ -87,39 +87,33 @@ const Edit: any = (Parent: any) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Nome da Tag"
+          label="Posição do Beacon 1"
           name="name"
-          rules={[{ required: true, message: 'Prrencha com o nome' }]}
+          rules={[{ required: true, message: 'Preencha com o nome' }]}
           initialValue={tag.name}
         >
-          <Input />
+          <Input disabled defaultValue={0}/>
         </Form.Item>
 
-        <Form.Item initialValue={tag.macAddress} label="MAC Address da Tag">
-          <Select value={tag.macAddress} disabled>
-            <Select.Option
-              className="formSelect"
-              bordered={false}
-              value={tag.macAddress}
-              key={`${tag.macAddress}-0`}>
-              {tag.macAddress}
-            </Select.Option>
-            )
-          </Select>
+        <Form.Item
+          label="Distância para o Beacon 1 (Beacon 2)"
+          name="name"
+          rules={[{ required: true, message: 'Preencha com o nome' }]}
+          initialValue={tag.name}
+        >
+          <Input disabled defaultValue={0}/>
         </Form.Item>
 
-        <Form.Item name="category" initialValue={tag.category} label="Categoria da Tag">
-          <Select>
-            {
-              // Para cada categoria, cria uma opção para poder editar a categoria da Tag
-              categories.map((category: any, index: number) => {
-                return (
-                  <Select.Option key={`${category}-${index}`} value={category.name}>{category.name}</Select.Option>
-                )
-              })
-            }
-          </Select>
+        <Form.Item
+          label="Distância para o Beacon 1 (Beacon 3)"
+          name="name"
+          rules={[{ required: true, message: 'Preencha com o nome' }]}
+          initialValue={tag.name}
+        >
+          <Input disabled defaultValue={0}/>
         </Form.Item>
+
+
 
         <Form.Item>
           <Button className='button' htmlType="submit">
@@ -136,4 +130,4 @@ const Edit: any = (Parent: any) => {
   )
 }
 
-export default Edit
+export default Configuration

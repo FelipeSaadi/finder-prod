@@ -169,7 +169,7 @@ const List: any = (Parent: any) => {
 
   // Função responsável por fazer a requisição de deletação de Tag, passando como parâmetro o ID da Tag 
   async function deleteTag(id: string) {
-    await fetch(`http://localhost:8000/api/tags/${id}`, {
+    await fetch(`http://2zrvp7-8000.preview.csb.app/api/tags/${id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json'
@@ -252,12 +252,6 @@ const List: any = (Parent: any) => {
 
   return (
     <div id="tags-list">
-      <div className="buttonContainer">
-        {haveNewTags()}
-        <Link to={"/tags/add"}>
-          <Button>Adicionar Tag</Button>
-        </Link>
-      </div>
       <Table rowKey="name" className='table' columns={columns} dataSource={tags} pagination={{ pageSize: 5 }} />
     </div>
   )

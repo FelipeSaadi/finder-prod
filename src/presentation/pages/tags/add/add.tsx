@@ -17,7 +17,7 @@ const Add: any = (Parent: any) => {
 
   // Função responsável por fazer a requisição de Cadastro de Tag para o backend
   async function createTag(values: any) {
-    await fetch(`http://localhost:8000/api/tags/${values.id}`, {
+    await fetch(`http://2zrvp7-8000.preview.csb.app/api/tags/${values.id}`, {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json'

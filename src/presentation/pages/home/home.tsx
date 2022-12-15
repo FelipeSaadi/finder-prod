@@ -33,10 +33,10 @@ const Home: React.FC = () => {
 
   // Função responsável por requisitar ao Backend todas as tags existentes
   async function getTags() {
-    await fetch("http://localhost:8000/api/tags", {
+    await fetch("http://2zrvp7-8000.preview.csb.app/api/tags", {
       method: "GET",
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     }).then((response) => response.json())
       .then((json) => {
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
 
   // Função responsável por requisitar todas as novas tags, aquelas que ainda não forma cadastradas
   async function getNewTags() {
-    await fetch("http://localhost:8000/api/tags/?name=&category=", {
+    await fetch("http://2zrvp7-8000.preview.csb.app/api/tags/?name=&category=", {
 
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ const Home: React.FC = () => {
 
   // Função responsável por solicitar ao backend todas as categorias existentes
   async function getCategories() {
-    await fetch("http://localhost:8000/api/category", {
+    await fetch("http://2zrvp7-8000.preview.csb.app/api/category", {
       method: "GET",
       headers: {
         'Content-Type': 'application/json'
